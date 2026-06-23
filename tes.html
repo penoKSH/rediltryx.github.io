@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIMSETTINGS</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #050507;
+  color: white;
+}
+
+.header {
+  padding: 18px;
+  text-align: center;
+  background: #0a0a0a;
+  border-bottom: 2px solid red;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 20px;
+  color: red;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px red;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding: 10px;
+}
+
+.card {
+  background: #0a0a0a;
+  border-radius: 15px;
+  border: 1px solid #1a1a1a;
+  text-align: center;
+  overflow: hidden;
+  padding-bottom: 10px;
+}
+
+/* 🫧 BUBBLE SOFT */
+.bubble {
+  background: radial-gradient(circle at top left, rgba(255,0,0,0.18), transparent 60%),
+              radial-gradient(circle at bottom right, rgba(255,0,0,0.10), transparent 60%);
+  box-shadow: 0 0 15px rgba(255,0,0,0.12);
+}
+
+.card img {
+  width: 100%;
+  height: 140px;
+  object-fit: contain;
+  background: #050507;
+}
+
+.name {
+  margin-top: 8px;
+  font-weight: bold;
+}
+
+.price {
+  color: red;
+  font-weight: bold;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+/* BUTTON BUY NOW */
+.btn {
+  background: red;
+  color: white;
+  border: none;
+  padding: 9px;
+  width: 90%;
+  margin: 6px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  animation: pulseRed 1.8s infinite;
+}
+
+/* QR BUTTON */
+.qr-btn {
+  background: #25D366;
+  color: white;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  margin: 10px 0;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(37, 211, 102, 0.4);
+}
+
+/* CLOSE */
+.close {
+  background: #222;
+  color: white;
+  border: 1px solid red;
+  padding: 10px;
+  width: 90%;
+  margin: 6px auto;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  display: block;
+}
+
+/* POPUP */
+.popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.popup-box {
+  background: #0a0a0a;
+  padding: 18px;
+  border-radius: 15px;
+  width: 300px;
+  text-align: center;
+  border: 1px solid red;
+}
+
+/* BAR */
+.bar-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #aaa;
+  margin: 6px 10px 0;
+}
+
+.bar {
+  width: 90%;
+  height: 6px;
+  background: #1a1a1a;
+  border-radius: 10px;
+  margin: 5px auto;
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  width: 0%;
+  background: red;
+  box-shadow: 0 0 10px red;
+}
+
+/* FULL QR */
+#qrFullScreen {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.95);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+#qrFullScreen img {
+  width: 90%;
+  max-width: 400px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px red;
+}
+
+/* PULSE */
+@keyframes pulseRed {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,0,0,0.6); }
+  70% { transform: scale(1.03); box-shadow: 0 0 0 10px rgba(255,0,0,0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,0,0,0); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <h1>AIMSETTINGS</h1>
+</div>
+
+<audio id="clickSound" src="https://www.myinstants.com/media/sounds/click.mp3"></audio>
+<div class="container">
+
+<!-- PRODUCT 1 -->
+<div class="card bubble">
+  <img src="https://ik.imagekit.io/mlcbcs6u5/IMG-20260622-WA0054.jpg">
+  <div class="name">VVIP AIM</div>
+
+  <div class="bar-label"><span>Aim Lock</span><span class="val">98%</span></div>
+  <div class="bar"><div class="fill" data="98"></div></div>
+
+  <div class="bar-label"><span>Stability</span><span class="val">95%</span></div>
+  <div class="bar"><div class="fill" data="95"></div></div>
+
+  <div class="bar-label"><span>Control</span><span class="val">92%</span></div>
+  <div class="bar"><div class="fill" data="92"></div></div>
+
+  <div class="price">Rp 35.000</div>
+  <button class="btn" onclick="playClick(); openPopup('VVIP AIM','35000')">BUY NOW</button>
+</div>
+
+<!-- PRODUCT 2 -->
+<div class="card bubble">
+  <img src="https://ik.imagekit.io/mlcbcs6u5/IMG-20260622-WA0054.jpg">
+  <div class="name">VIP AIM</div>
+
+  <div class="bar-label"><span>Accuracy</span><span class="val">92%</span></div>
+  <div class="bar"><div class="fill" data="92"></div></div>
+
+  <div class="bar-label"><span>Stability</span><span class="val">90%</span></div>
+  <div class="bar"><div class="fill" data="90"></div></div>
+
+  <div class="bar-label"><span>Control</span><span class="val">88%</span></div>
+  <div class="bar"><div class="fill" data="88"></div></div>
+
+  <div class="price">Rp 25.000</div>
+  <button class="btn" onclick="playClick(); openPopup('VIP AIM','25000')">BUY NOW</button>
+</div>
+
+<!-- PRODUCT 3 -->
+<div class="card bubble">
+  <img src="https://ik.imagekit.io/mlcbcs6u5/IMG-20260622-WA0054.jpg">
+  <div class="name">HEADSHOT PRO</div>
+
+  <div class="bar-label"><span>Control</span><span class="val">90%</span></div>
+  <div class="bar"><div class="fill" data="90"></div></div>
+
+  <div class="bar-label"><span>Accuracy</span><span class="val">93%</span></div>
+  <div class="bar"><div class="fill" data="93"></div></div>
+
+  <div class="bar-label"><span>Stability</span><span class="val">91%</span></div>
+  <div class="bar"><div class="fill" data="91"></div></div>
+
+  <div class="price">Rp 40.000</div>
+  <button class="btn" onclick="playClick(); openPopup('HEADSHOT PRO','40000')">BUY NOW</button>
+</div>
+
+<!-- PRODUCT 4 -->
+<div class="card bubble">
+  <img src="https://ik.imagekit.io/mlcbcs6u5/IMG-20260622-WA0054.jpg">
+  <div class="name">NO RECOIL</div>
+
+  <div class="bar-label"><span>Stable</span><span class="val">88%</span></div>
+  <div class="bar"><div class="fill" data="88"></div></div>
+
+  <div class="bar-label"><span>Control</span><span class="val">90%</span></div>
+  <div class="bar"><div class="fill" data="90"></div></div>
+
+  <div class="bar-label"><span>Precision</span><span class="val">87%</span></div>
+  <div class="bar"><div class="fill" data="87"></div></div>
+
+  <div class="price">Rp 30.000</div>
+  <button class="btn" onclick="playClick(); openPopup('NO RECOIL','30000')">BUY NOW</button>
+</div>
+
+<!-- PRODUCT 5 -->
+<div class="card bubble">
+  <img src="https://ik.imagekit.io/mlcbcs6u5/IMG-20260622-WA0054.jpg">
+  <div class="name">MAX AIM</div>
+
+  <div class="bar-label"><span>Power</span><span class="val">99%</span></div>
+  <div class="bar"><div class="fill" data="99"></div></div>
+
+  <div class="bar-label"><span>Accuracy</span><span class="val">97%</span></div>
+  <div class="bar"><div class="fill" data="97"></div></div>
+
+  <div class="bar-label"><span>Stability</span><span class="val">95%</span></div>
+  <div class="bar"><div class="fill" data="95"></div></div>
+
+  <div class="price">Rp 50.000</div>
+  <button class="btn" onclick="playClick(); openPopup('MAX AIM','50000')">BUY NOW</button>
+</div>
+
+</div>
+
+<!-- POPUP -->
+<div class="popup" id="popup">
+  <div class="popup-box">
+
+    <h3>QRIS PAYMENT</h3>
+
+    <p style="font-size:12px;color:#aaa;">
+      Silakan lakukan pembayaran dan kirim bukti untuk konfirmasi admin.
+    </p>
+
+    <button class="qr-btn" onclick="playClick(); openQRFull()">Lihat QRIS</button>
+    <button class="qr-btn" onclick="playClick(); sendWA()">Kirim Bukti Pembayaran</button>
+    <button class="close" onclick="playClick(); closePopup()">Tutup</button>
+
+  </div>
+</div>
+
+<!-- QR FULL -->
+<div id="qrFullScreen" onclick="closeQRFull()">
+  <img src="https://ik.imagekit.io/mlcbcs6u5/IMG-20260621-WA0004.jpg?updatedAt=1782146483248">
+</div>
+
+<script>
+
+let selectedProduct = "";
+let selectedPrice = "";
+let trxID = "";
+
+function playClick() {
+  let sound = document.getElementById("clickSound");
+  sound.currentTime = 0;
+  sound.play();
+}
+
+function openPopup(p, price) {
+  selectedProduct = p;
+  selectedPrice = price;
+  trxID = "TRX-" + Math.floor(Math.random()*99999999);
+  document.getElementById("popup").style.display = "flex";
+}
+
+function closePopup() {
+  document.getElementById("popup").style.display = "none";
+}
+
+function openQRFull() {
+  document.getElementById("qrFullScreen").style.display = "flex";
+}
+
+function closeQRFull() {
+  document.getElementById("qrFullScreen").style.display = "none";
+}
+
+function sendWA() {
+  let nomor = "6285701817687";
+  let now = new Date();
+
+  let msg =
+`*DETAIL TRANSAKSI BUYER* 📄
+
+📦 Produk: ${selectedProduct}
+💰 Nominal: Rp ${selectedPrice}
+🧾 Invoice: ${trxID}
+⏰ Waktu: ${now.toLocaleString("id-ID")} ⏰
+
+Mohon konfirmasi & proses transaksi ya admin 🙏
+Terima kasih!`;
+
+  window.open("https://wa.me/" + nomor + "?text=" + encodeURIComponent(msg));
+}
+
+/* BAR ANIMATION */
+window.onload = () => {
+  document.querySelectorAll(".fill").forEach(el => {
+    let target = el.getAttribute("data");
+    let val = 0;
+    let text = el.parentElement.previousElementSibling.querySelector(".val");
+
+    let int = setInterval(() => {
+      if (val >= target) clearInterval(int);
+      else {
+        val++;
+        el.style.width = val + "%";
+        text.innerText = val + "%";
+      }
+    }, 15);
+  });
+};
+
+</script>
+
+</body>
+</html>
